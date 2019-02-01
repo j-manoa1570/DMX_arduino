@@ -32,7 +32,6 @@ int channelValues[3];
 int currentChannels[CHANNELS];
 int blackout[CHANNELS];
 int scenes[SCENES][CHANNELS];
-int i = 1;
 
 bool validScenes[SCENES];
 bool off = false;
@@ -219,7 +218,7 @@ void loop(void)
           Serial.print(channelValues[1]);
           Serial.print(", ");
           Serial.println(channelValues[2] - 1);
-          for (i = 1; i < 15; i++) {
+          for (int i = 1; i < 15; i++) {
             Serial.print(currentChannels[i]);
             Serial.print(" ");
           }
@@ -232,7 +231,7 @@ void loop(void)
           Serial.print(channelValues[1]);
           Serial.print(", ");
           Serial.println(255);
-          for (i = 1; i < 15; i++) {
+          for (int i = 1; i < 15; i++) {
             Serial.print(currentChannels[i]);
             Serial.print(" ");
           }
@@ -240,11 +239,11 @@ void loop(void)
           // Code: 4
         } else if (channelValues[0] == 4) {
           if (channelValues[1] == 1) {
-            for (i = 1; i <= CHANNELS; i++) {
+            for (int i = 1; i <= CHANNELS; i++) {
               scenes[channelValues[2]][i] = currentChannels[i];
             }
           } else if (channelValues[1] == 2) {
-            for (i = i; i <= CHANNELS; i++ ) {
+            for (int i = i; i <= CHANNELS; i++ ) {
               currentChannels[i] = scenes[channelValues[2]][i];
               DmxSimple.write(i,currentChannels[i]);
             }
